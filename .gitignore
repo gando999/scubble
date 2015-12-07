@@ -3,6 +3,7 @@
 *_client.py
 .*.swp
 .coverage
+*.out
 .deploy
 .editorconfig
 .idea
