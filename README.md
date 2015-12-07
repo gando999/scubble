@@ -83,7 +83,7 @@ funky_structure(example)
 # => <struct>BaseResource fields ['args', 'call', 'target'] values {'args': 'somearg', 'call': 'on_get', 'target': 'hello'}
 ```
 
-### Functions have valid return values from their scope
+### Functions return values from their scope
 ```
 defun returner():
   inner_var = 'ill be back'

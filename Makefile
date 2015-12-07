@@ -23,4 +23,4 @@ interp: requirements
 clean:
 	find . -name '*.pyc' -delete
 	find . -name '*.out' -delete
-
+	rm -f parsetab.py
