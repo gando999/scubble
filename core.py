@@ -1,7 +1,6 @@
 class ReturnValue(Exception):
     """
     Return value for function calls
-
     """
     value = None
 
@@ -9,7 +8,6 @@ class ReturnValue(Exception):
 class ASTNode(object):
     """
     Node to represent an operation in the AST
-
     """
     def __init__(self, ntype, children=None, leaf=None):
         self.type = ntype
@@ -28,9 +26,7 @@ class ASTNode(object):
 class ScopedSymbol(object):
     """
     Base class for symbols
-
     """
-
     def __init__(self, name, enclosing_scope):
         self.name = name
         self.scope = None
@@ -61,9 +57,7 @@ class ScopedSymbol(object):
 class StructSymbol(ScopedSymbol):
     """
     Represents context for defining a structure
-
     """
-    
     def __init__(self, name, parent_scope):
         super(StructSymbol, self).__init__(name, parent_scope)
         self.fields = {}
@@ -84,9 +78,7 @@ class StructSymbol(ScopedSymbol):
 class FunctionSymbol(ScopedSymbol):
     """
     Represents context for defining a function
-
     """
-
     def __init__(self, name, parent_scope):
         super(FunctionSymbol, self).__init__(name, parent_scope)
         self.ast_block = None
@@ -102,9 +94,7 @@ class FunctionSymbol(ScopedSymbol):
 class VariableSymbol(object):
     """
     Represents context for defining a variable
-
     """
-
     def __init__(self, name):
         self.name = name
         self.scope = None
@@ -116,9 +106,7 @@ class VariableSymbol(object):
 class Scope(object):
     """
     A scope holds symbols
-
     """
-
     def __init__(self, parent_scope=None):
         self.enclosing_scope = parent_scope
         self.symbols = {}
@@ -145,9 +133,7 @@ class Scope(object):
 class LocalScope(Scope):
     """
     A local scope has a parent
-
     """
-
     def __init__(self, parent_scope=None):
         super(LocalScope, self).__init__(parent_scope)
 
@@ -156,9 +142,7 @@ class MemorySpace(object):
     """
     A context for defining specific values for execution.
     Every executing program has a global space
-    
     """
-
     def __init__(self, name):
         self.name = name
         self.members = {}
@@ -168,21 +152,16 @@ class FunctionSpace(MemorySpace):
     """
     A context where data for specific function evaluation
     is held.
-    
     """
-
     def __init__(self, func_symbol):
         super(FunctionSpace, self).__init__(func_symbol.name)
         self.symbol = func_symbol # the function we are executing
         
 
-# Should this really inherit from a space?
 class StructInstance(MemorySpace):
     """
     Underlying implementation of a struct
-
     """
-
     def __init__(self, struct_symbol):
         super(StructInstance, self).__init__(struct_symbol.name)
         self.ss = struct_symbol

@@ -97,7 +97,7 @@ def p_statement_structdef(p):
         current_scope.define(vs)
     current_scope = current_scope.enclosing_scope
 
-def p_function_definition(p): # TODO: refactor this 
+def p_function_definition(p):
     '''function_definition : DEFUN ID paren_id_list COLON program END
                            | DEFUN ID paren_empty_list COLON program END'''
     global current_scope
@@ -109,7 +109,7 @@ def p_function_definition(p): # TODO: refactor this
         current_scope.define(vs)
     current_scope = LocalScope(fs)
     fs.ast_block = p[5] if isinstance(p[5], list) else [p[5]]
-    current_scope = current_scope.enclosing_scope # why do we need twice?
+    current_scope = current_scope.enclosing_scope # pop twice (refactor)
     current_scope = current_scope.enclosing_scope
 
 def p_paren_id_list(p):
@@ -124,7 +124,7 @@ def p_paren_empty_list(p):
     '''paren_empty_list : LPAREN RPAREN'''
     p[0] = []
 
-def p_call(p): # TODO: refactor this
+def p_call(p):
     '''call : ID paren_expr_list
             | ID paren_empty_list'''
     node = ASTNode('CALL', children=[p[1], p[2]])
